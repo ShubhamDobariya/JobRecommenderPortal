@@ -17,9 +17,14 @@ async def get_signup(request: Request):
 
 @router.post("/signup")
 async def register(user: UserCreate, request: Request):
-    result = await signup_user(user)
-    request.session["user"] = result.get("user_id")  # store session
-    return RedirectResponse(url="/dashboard", status_code=302)
+    try:
+        result = await signup_user(user)
+        request.session["user"] = result.get("user_id")  # store session
+        return RedirectResponse(url="/dashboard", status_code=302)
+    except Exception as e:
+        return templates.TemplateResponse(
+            "signup.html", {"request": request, "error": str(e)}
+        )
 
 
 @router.get("/login", response_class=HTMLResponse)
@@ -31,10 +36,16 @@ async def get_login(request: Request):
 
 @router.post("/login")
 async def login(user: UserLogin, request: Request):
-    result = await login_user(user)
-    if result.get("success"):
-        request.session["user"] = result.get("user_id")
-        return RedirectResponse(url="/dashboard", status_code=302)
-    return templates.TemplateResponse(
-        "login.html", {"request": request, "error": result.get("message")}
-    )
+    try:
+        result = await login_user(user)
+        if result.get("success"):
+            request.session["user"] = result.get("user_id")
+            return RedirectResponse(url="/dashboard", status_code=302)
+        return templates.TemplateResponse(
+            "login.html", {"request": request, "error": result.get("message")}
+        )
+    except Exception as e:
+        return templates.TemplateResponse(
+            "login.html",
+            {"request": request, "error": "Login failed. Please try again."},
+        )

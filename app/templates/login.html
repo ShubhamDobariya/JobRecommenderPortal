@@ -13,6 +13,19 @@ block extra_head %}
     </div>
 
     <div class="form-container">
+      {% if error %}
+      <div
+        style="
+          color: red;
+          margin-bottom: 15px;
+          padding: 10px;
+          background: #ffe6e6;
+          border-radius: 5px;
+        "
+      >
+        {{ error }}
+      </div>
+      {% endif %}
       <form id="login-form" novalidate>
         <div class="form-group">
           <label for="email">Email Address</label>

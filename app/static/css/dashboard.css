@@ -1,0 +1,29 @@
+.dashboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.welcome-message {
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* .logout-btn {
+    background: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.logout-btn:hover {
+    background: #c82333;
+} */

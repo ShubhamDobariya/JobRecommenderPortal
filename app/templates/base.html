@@ -37,8 +37,12 @@
           id="navbarNav"
         >
           <div class="d-flex align-items-center">
+            {% if request.session.get("user") %}
+            <a href="/logout" class="nav-btn nav-logout">Logout</a>
+            {% else %}
             <a href="/login" class="nav-btn nav-login">Login</a>
             <a href="/signup" class="nav-btn nav-signup">Sign Up</a>
+            {% endif %}
           </div>
         </div>
       </div>

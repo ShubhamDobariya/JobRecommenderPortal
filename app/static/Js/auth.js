@@ -42,19 +42,36 @@ document.addEventListener("DOMContentLoaded", function () {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(userData),
+          redirect: "follow",
         });
 
-        const result = await response.json();
+        // Check if we got redirected to dashboard
+        if (response.url.includes("/dashboard") || response.redirected) {
+          window.location.href = "/dashboard";
+          return;
+        }
 
-        if (response.ok) {
-          setTimeout(() => {
-            // window.location.href = "/login";
-            signupForm.reset();
-          }, 2000);
+        // If response is not ok, it means there was an error
+        if (!response.ok) {
+          // Try to get error message from response
+          const contentType = response.headers.get("content-type");
+          let errorMessage = "Registration failed. Please try again.";
+
+          if (contentType && contentType.includes("application/json")) {
+            try {
+              const result = await response.json();
+              errorMessage = result.detail || errorMessage;
+            } catch (e) {
+              // If JSON parsing fails, use default message
+            }
+          }
+          alert(errorMessage);
         } else {
-          alert(result.detail || "Registration failed. Please try again.");
+          // Success but no redirect - redirect manually
+          window.location.href = "/dashboard";
         }
       } catch (error) {
+        console.error("Signup error:", error);
         alert("Network error. Please check your connection and try again.");
       } finally {
         setLoading(signupForm, false);
@@ -80,24 +97,36 @@ document.addEventListener("DOMContentLoaded", function () {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(userData),
+          redirect: "follow",
         });
 
-        const result = await response.json();
+        // Check if we got redirected to dashboard
+        if (response.url.includes("/dashboard") || response.redirected) {
+          window.location.href = "/dashboard";
+          return;
+        }
 
-        if (response.ok) {
-          localStorage.setItem("access_token", result.access_token);
-          localStorage.setItem("user", JSON.stringify(result.user));
+        // If response is not ok, it means there was an error
+        if (!response.ok) {
+          // Try to get error message from response
+          const contentType = response.headers.get("content-type");
+          let errorMessage = "Login failed. Please check your credentials.";
 
-          setTimeout(() => {
-            // window.location.href = "/dashboard";
-            loginForm.reset();
-          }, 1000);
+          if (contentType && contentType.includes("application/json")) {
+            try {
+              const result = await response.json();
+              errorMessage = result.detail || result.message || errorMessage;
+            } catch (e) {
+              // If JSON parsing fails, use default message
+            }
+          }
+          alert(errorMessage);
         } else {
-          alert(
-            result.detail || "Login failed. Please check your credentials."
-          );
+          // Success but no redirect - redirect manually
+          window.location.href = "/dashboard";
         }
       } catch (error) {
+        console.error("Login error:", error);
         alert("Network error. Please check your connection and try again.");
       } finally {
         setLoading(loginForm, false);

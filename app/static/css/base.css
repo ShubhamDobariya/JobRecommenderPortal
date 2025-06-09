@@ -42,6 +42,13 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
+/* Logout button - red style */
+.navbar-custom a.nav-logout {
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+
 main {
     margin-top: 80px;
     /* Added margin to the main content */

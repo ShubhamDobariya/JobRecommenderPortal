@@ -31,6 +31,7 @@ async def signup_user(user_data: UserCreate) -> Dict:
     try:
         result = await users_collection.insert_one(new_user)
         return {
+            "success": True,
             "msg": "User registered successfully",
             "user_id": str(result.inserted_id),
         }
@@ -42,24 +43,22 @@ async def signup_user(user_data: UserCreate) -> Dict:
 
 async def login_user(user_data: UserLogin) -> Dict:
     """
-    Verifies user credentials and returns JWT token if valid.
+    Verifies user credentials and returns success status with user info.
     """
     user = await users_collection.find_one({"email": user_data.email})
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password"
-        )
+        return {"success": False, "message": "Invalid email or password"}
 
     if not verify_password(user_data.password, user["password"]):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password"
-        )
+        return {"success": False, "message": "Invalid email or password"}
 
     token = create_access_token(
         data={"user_id": str(user["_id"]), "email": user["email"]}
     )
 
     return {
+        "success": True,
+        "user_id": str(user["_id"]),
         "access_token": token,
         "token_type": "bearer",
         "user": {"username": user["username"], "email": user["email"]},

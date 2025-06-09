@@ -32,14 +32,22 @@ app.include_router(auth_router)
 
 
 @app.get("/dashboard")
-def read_root(request: Request):
-    print("Session user:", request.session.get("user"))
+def dashboard(request: Request):
     user_id = request.session.get("user")
     if not user_id:
         return RedirectResponse(url="/login", status_code=302)
-    return {"message": "Welcome to Job Recommender Portal!"}
+    return templates.TemplateResponse("dashboard.html", {"request": request})
 
 
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to Home Page!"}
+def read_root(request: Request):
+    user_id = request.session.get("user")
+    if user_id:
+        return RedirectResponse(url="/dashboard", status_code=302)
+    return RedirectResponse(url="/login", status_code=302)
+
+
+@app.get("/logout")
+def logout(request: Request):
+    request.session.clear()
+    return RedirectResponse(url="/login", status_code=302)
