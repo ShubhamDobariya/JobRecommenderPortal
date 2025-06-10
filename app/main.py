@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 from app.routes.auth_routes import router as auth_router
+from app.routes.resume_routes import router as resume_router
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from app.core.config import SECRET_KEY
@@ -29,25 +30,12 @@ templates = Jinja2Templates(directory="app/templates")
 
 # Include auth router
 app.include_router(auth_router)
-
-
-@app.get("/dashboard")
-def dashboard(request: Request):
-    user_id = request.session.get("user")
-    if not user_id:
-        return RedirectResponse(url="/login", status_code=302)
-    return templates.TemplateResponse("dashboard.html", {"request": request})
+app.include_router(resume_router)
 
 
 @app.get("/")
 def read_root(request: Request):
     user_id = request.session.get("user")
     if user_id:
-        return RedirectResponse(url="/dashboard", status_code=302)
-    return RedirectResponse(url="/login", status_code=302)
-
-
-@app.get("/logout")
-def logout(request: Request):
-    request.session.clear()
+        return RedirectResponse(url="/Upload-Resume", status_code=302)
     return RedirectResponse(url="/login", status_code=302)

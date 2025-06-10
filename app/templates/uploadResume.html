@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %}Resume Upload - Job Recommender
+Portal{% endblock %} {% block extra_head %}
+<link rel="stylesheet" href="../static/css/uploadResume.css" />
+{% endblock %} {% block content %}
+<div class="upload-container">
+  <h3 class="text-center">Upload Your Resume</h3>
+  <p class="text-center">
+    Upload your resume to get personalized job recommendations
+  </p>
+
+  <form
+    id="resumeForm"
+    action="/upload_resume"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div class="mb-3">
+      <label for="resume" class="form-label">Choose Resume File</label>
+      <input
+        type="file"
+        class="form-control"
+        id="resume"
+        name="resume"
+        accept=".pdf,.doc,.docx"
+        required
+      />
+      <div class="form-text">Supported formats: PDF, DOC, DOCX</div>
+    </div>
+
+    <button id="uploadBtn" type="submit" class="btn btn-primary w-100" disabled>
+      Upload
+    </button>
+  </form>
+</div>
+
+<script src="../static/Js/uploadResume.js"></script>
+
+{% endblock %}

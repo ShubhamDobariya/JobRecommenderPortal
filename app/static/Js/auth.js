@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Check if we got redirected to dashboard
-        if (response.url.includes("/dashboard") || response.redirected) {
-          window.location.href = "/dashboard";
+        if (response.url.includes("/Upload-Resume") || response.redirected) {
+          window.location.href = "/Upload-Resume";
           return;
         }
 
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
           alert(errorMessage);
         } else {
           // Success but no redirect - redirect manually
-          window.location.href = "/dashboard";
+          window.location.href = "/Upload-Resume";
         }
       } catch (error) {
         console.error("Signup error:", error);
@@ -101,8 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Check if we got redirected to dashboard
-        if (response.url.includes("/dashboard") || response.redirected) {
-          window.location.href = "/dashboard";
+        if (response.url.includes("/Upload-Resume") || response.redirected) {
+          window.location.href = "/Upload-Resume";
           return;
         }
 
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
           alert(errorMessage);
         } else {
           // Success but no redirect - redirect manually
-          window.location.href = "/dashboard";
+          window.location.href = "/Upload-Resume";
         }
       } catch (error) {
         console.error("Login error:", error);
