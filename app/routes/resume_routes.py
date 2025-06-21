@@ -1,19 +1,20 @@
-from fastapi import APIRouter, Request, HTTPException, Request, UploadFile, File
+from fastapi import APIRouter, Request, Request, UploadFile, File
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 import cloudinary.uploader
-from docx import Document
-import PyPDF2
 from app.core.cloudinaryConfig import (
     resumes_collection,
     configure_cloudinary,
     get_cloudinary_upload_params,
 )
+from app.controllers.resume_parser import extract_text_from_resume
 
 # import os
 # import re
 # from typing import Dict, List
 # import io
+# from docx import Document
+# import PyPDF2 (Remove from my venv)
 
 router = APIRouter(tags=["Resume Upload"])
 templates = Jinja2Templates(directory="app/templates")
@@ -67,18 +68,7 @@ async def uploadResume(request: Request, resume: UploadFile = File(...)):
         )
 
     # Extract text from the document
-    text = ""
-
-    if resume.filename.endswith(".pdf"):
-        # PDF extraction
-        pdf = PyPDF2.PdfReader(resume.file)
-        for page in pdf.pages:
-            text += page.extract_text()
-    elif resume.filename.endswith(".docx"):
-        # DOCX extraction
-        doc = Document(resume.file)
-        for para in doc.paragraphs:
-            text += para.text
+    text = extract_text_from_resume(resume)
 
     # Store in your database
     resumes_collection.insert_one(
