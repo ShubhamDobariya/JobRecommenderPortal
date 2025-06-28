@@ -50,13 +50,6 @@ async def uploadResume(request: Request, resume: UploadFile = File(...)):
     if resume.content_type not in allowed:
         return JSONResponse({"error": "Invalid file format"}, status_code=400)
 
-    # if resume.file._file.tell() > 5 * 1024 * 1024:
-    #     return JSONResponse(
-    #         {"error": "File size exceeds maximum limit"}, status_code=400
-    #     )
-
-    # resume.file.seek(0)
-
     # Get file size properly
     resume.file.seek(0, 2)  # Seek to end
     file_size = resume.file.tell()
@@ -98,16 +91,6 @@ async def uploadResume(request: Request, resume: UploadFile = File(...)):
         )
     except Exception as e:
         return JSONResponse({"error": f"Database error: {str(e)}"}, status_code=500)
-
-    # # Store in your database
-    # resumes_collection.insert_one(
-    #     {
-    #         "user_id": user_id,
-    #         "file_name": f"{user_id}_{resume.filename}",
-    #         "file_url": result["secure_url"],
-    #         "text": text,
-    #     }
-    # )
 
     return RedirectResponse(url="/Job-Portal", status_code=302)
 

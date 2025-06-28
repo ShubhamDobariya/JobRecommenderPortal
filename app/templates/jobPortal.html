@@ -13,18 +13,49 @@ block extra_head %}
 {% endif %}
 
 <!-- 👇 Job Cards -->
-<div class="job-container" id="job-list" style="display: none">
-  {% for job in jobs %}
-  <div class="job-card">
-    <h3>{{ job.title }}</h3>
-    <p><strong>Company:</strong> {{ job.company }}</p>
-    <p><strong>Location:</strong> {{ job.location }}</p>
-    <p><strong>Match Score:</strong> {{ job.score }}%</p>
-    <a href="{{ job.apply_url }}" target="_blank" class="apply-btn"
-      >Apply Now</a
-    >
+<div class="container mt-4" id="job-list" style="display: none">
+  <div class="row">
+    {% for job in jobs %}
+    <div class="col-lg-4 col-md-6 mb-4 d-flex">
+      <div class="card shadow-sm job-card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ job.title }}</h5>
+
+          <p class="card-subtitle mb-2 text-muted">
+            <span class="me-1">🏢</span>{{ job.company }}
+          </p>
+
+          <p class="text-muted mb-2">
+            <span class="me-1">📍</span>{{ job.location }}
+          </p>
+
+          <p class="text-muted mb-2">
+            <span class="me-1">📊</span><strong>Match Score:</strong> {{
+            job.score }}%
+          </p>
+
+          <p class="card-text job-description" id="desc-{{ loop.index }}">
+            <span class="me-1">📄</span>{{ job.job_text[:200] }}...
+            <span class="more-text d-none">{{ job.job_text[200:] }}</span>
+            <button
+              class="btn btn-sm btn-link toggle-btn ps-0"
+              data-target="desc-{{ loop.index }}"
+            >
+              Show more
+            </button>
+          </p>
+
+          <a
+            href="{{ job.apply_url }}"
+            class="apply-btn mt-auto"
+            target="_blank"
+            >Apply Now</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 
 <script src="../static/Js/jobsPortal.js"></script>
