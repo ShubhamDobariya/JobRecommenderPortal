@@ -1,12 +1,10 @@
 from app.schemas.user_schema import UserCreate, UserLogin
-from app.core.db import db
+from app.core.db import users_collection
 from app.core.security import hash_password, verify_password, create_access_token
 from fastapi import HTTPException, status
 from pymongo.errors import DuplicateKeyError
 from datetime import datetime, timezone
 from typing import Dict
-
-users_collection = db["users"]
 
 
 async def signup_user(user_data: UserCreate) -> Dict:

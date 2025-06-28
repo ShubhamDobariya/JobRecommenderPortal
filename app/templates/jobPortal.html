@@ -29,6 +29,9 @@ endblock %} {% block head %}
   <h2>🔍 Fetching your recommended jobs...</h2>
   <img src="/static/loader.gif" alt="loading..." />
 </div>
+{% if used_fallback %}
+<div class="notice">⚠️ Showing sample jobs due to API error.</div>
+{% endif %}
 
 <!-- 👇 Job Cards -->
 <div class="job-container" id="job-list" style="display: none">
@@ -45,12 +48,14 @@ endblock %} {% block head %}
   {% endfor %}
 </div>
 
-<!-- 👇 Loader Script
+<!-- 👇 Loader Script -->
 <script>
   window.addEventListener("load", () => {
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("job-list").style.display = "block";
+    setTimeout(() => {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("job-list").style.display = "block";
+    }, 2000);
   });
-</script> -->
+</script>
 
 {% endblock %}
