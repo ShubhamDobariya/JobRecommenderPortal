@@ -1,13 +1,56 @@
-{% extends "base.html" %} {% block title %}Jobs Portal{% endblock %} {% block
-content %} {% block extra_head %}
+{% extends "base.html" %} {% block title %}Job Portal - Job Recommender{%
+endblock %} {% block head %}
 <link rel="stylesheet" href="../static/css/jobPortal.css" />
-{% endblock %}
+<style>
+  #loading {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  #loading img {
+    width: 60px;
+    margin-top: 10px;
+    animation: spin 1.5s linear infinite;
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+{% endblock %} {% block content %}
 
-<div class="parent-container">
-  <div>
-    <h1>Welcome to Jobs Portal</h1>
-    <p>Here you can view and apply for jobs that match your profile.</p>
-  </div>
+<!-- 👇 Loader -->
+<div id="loading">
+  <h2>🔍 Fetching your recommended jobs...</h2>
+  <img src="/static/loader.gif" alt="loading..." />
 </div>
+
+<!-- 👇 Job Cards -->
+<div class="job-container" id="job-list" style="display: none">
+  {% for job in jobs %}
+  <div class="job-card">
+    <h3>{{ job.title }}</h3>
+    <p><strong>Company:</strong> {{ job.company }}</p>
+    <p><strong>Location:</strong> {{ job.location }}</p>
+    <p><strong>Match Score:</strong> {{ job.score }}%</p>
+    <a href="{{ job.apply_url }}" target="_blank" class="apply-btn"
+      >Apply Now</a
+    >
+  </div>
+  {% endfor %}
+</div>
+
+<!-- 👇 Loader Script
+<script>
+  window.addEventListener("load", () => {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("job-list").style.display = "block";
+  });
+</script> -->
 
 {% endblock %}

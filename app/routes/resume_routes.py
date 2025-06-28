@@ -8,6 +8,7 @@ from app.core.cloudinaryConfig import (
     get_cloudinary_upload_params,
 )
 from app.controllers.resume_parser import extract_text_from_resume
+from app.controllers.job_controller import recommend_jobs
 
 # import os
 # import re
@@ -83,13 +84,24 @@ async def uploadResume(request: Request, resume: UploadFile = File(...)):
     return RedirectResponse(url="/Job-Portal", status_code=302)
 
 
-# job portal route
 @router.get("/Job-Portal")
 async def get_jobs_portal(request: Request):
     user_id = request.session.get("user")
     if not user_id:
         return RedirectResponse(url="/login", status_code=302)
 
+    # Fetch resume from DB
+    resume = await resumes_collection.find_one({"user_id": user_id})
+    if not resume or "text" not in resume:
+        return RedirectResponse(url="/Upload-Resume")
+
+    # Extract text and recommend jobs
+    resume_text = resume["text"]
+    recommended_jobs = recommend_jobs(resume_text, top_n=5)
+    print("recommended_jobs", recommended_jobs)
+
+    # Render recommended jobs in portal
     return templates.TemplateResponse(
-        "jobPortal.html", {"request": request, "user_id": user_id}
+        "jobPortal.html",
+        {"request": request, "user_id": user_id, "jobs": recommended_jobs},
     )
