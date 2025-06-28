@@ -1,27 +1,6 @@
-{% extends "base.html" %} {% block title %}Job Portal - Job Recommender{%
-endblock %} {% block head %}
+{% extends "base.html" %} {% block title %}Login - JobPortal{% endblock %} {%
+block extra_head %}
 <link rel="stylesheet" href="../static/css/jobPortal.css" />
-<style>
-  #loading {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 1.2rem;
-    color: #555;
-  }
-  #loading img {
-    width: 60px;
-    margin-top: 10px;
-    animation: spin 1.5s linear infinite;
-  }
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
 {% endblock %} {% block content %}
 
 <!-- 👇 Loader -->
@@ -48,14 +27,6 @@ endblock %} {% block head %}
   {% endfor %}
 </div>
 
-<!-- 👇 Loader Script -->
-<script>
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("loading").style.display = "none";
-      document.getElementById("job-list").style.display = "block";
-    }, 2000);
-  });
-</script>
+<script src="../static/Js/jobsPortal.js"></script>
 
 {% endblock %}
