@@ -1,4 +1,4 @@
-# Job Recommender Portal
+# 💼 Job Recommender Portal
 
 A modern web application that helps users find personalized job recommendations by uploading their resume. Built with FastAPI, MongoDB, and Bootstrap.
 
