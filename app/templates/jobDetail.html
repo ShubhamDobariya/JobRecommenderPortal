@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block title %}Job Detail{% endblock %} {% block
+extra_head %}
+<link rel="stylesheet" href="../static/css/jobDetail.css" />
+{% endblock %} {% block content %}
+<div class="container mt-5">
+  <div class="job-detail-card">
+    <h2 class="job-title">{{ job.title }}</h2>
+
+    <div class="job-info">
+      <div class="info-item"><strong>Company:</strong> {{ job.company }}</div>
+
+      <div class="info-item"><strong>Location:</strong> {{ job.location }}</div>
+
+      <div class="info-item">
+        <strong>Match Score:</strong>
+        <span class="match-score">{{ job.score }}%</span>
+      </div>
+    </div>
+
+    <div class="job-description">
+      <h4>Job Description:</h4>
+      <p>{{ job.job_text }}</p>
+    </div>
+
+    <div class="action-buttons">
+      <a
+        href="{{ job.apply_url }}"
+        class="apply-btn mt-auto"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Apply Now
+      </a>
+      <a href="/Job-Portal" class="btn btn-secondary"> Back to Jobs </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

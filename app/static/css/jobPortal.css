@@ -1,0 +1,117 @@
+.job-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 0 1rem;
+}
+
+.job-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e5e9;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.job-card h3 {
+    color: #2c3e50;
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.job-card p {
+    margin: 0.5rem 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.job-card p strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.apply-btn {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: inline-block;
+    text-align: center;
+    margin-top: 1rem;
+    margin-left: 0;
+}
+
+
+.notice {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem auto;
+    max-width: 800px;
+    text-align: center;
+    font-weight: 500;
+}
+
+#loading {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #555;
+    padding: 2rem;
+}
+
+#loading h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+#loading img {
+    width: 60px;
+    margin-top: 10px;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .job-container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .job-card {
+        padding: 1rem;
+    }
+
+    .job-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .apply-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}

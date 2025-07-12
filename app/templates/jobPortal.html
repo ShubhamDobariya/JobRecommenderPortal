@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Login - JobPortal{% endblock %} {%
+block extra_head %}
+<link rel="stylesheet" href="../static/css/jobPortal.css" />
+{% endblock %} {% block content %}
+
+<!-- 👇 Old Custom Loader -->
+<div id="loading">
+  <h2>🔍 Fetching your recommended jobs...</h2>
+  <img src="/static/loader.gif" alt="loading..." />
+</div>
+
+{% if used_fallback %}
+<div class="notice">⚠️ Showing sample jobs due to API error.</div>
+{% endif %}
+
+<!-- 👇 Job Cards -->
+<div class="container mt-4" id="job-list" style="display: none">
+  <div class="row">
+    {% for job in jobs %}
+    <div class="col-lg-4 col-md-6 mb-4 d-flex">
+      <div class="card shadow-sm job-card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ job.title }}</h5>
+
+          <p class="card-subtitle mb-2 text-muted">
+            <span class="me-1">🏢</span>{{ job.company }}
+          </p>
+
+          <p class="text-muted mb-2">
+            <span class="me-1">📍</span>{{ job.location }}
+          </p>
+
+          <p class="text-muted mb-2">
+            <span class="me-1">📊</span><strong>Match Score:</strong>
+            <span style="color: #27ae60; font-weight: bold; font-size: 1.1em"
+              >{{ job.score }}%</span
+            >
+          </p>
+
+          <p class="card-text job-description">
+            <span class="me-1">📄</span>{{ job.job_text[:200] }}...
+            <a href="/job-{{loop.index}}" class="btn btn-sm btn-link ps-0">
+              Show more
+            </a>
+          </p>
+
+          <a
+            href="{{ job.apply_url }}"
+            class="apply-btn mt-auto"
+            target="_blank"
+            >Apply Now</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script src="../static/Js/jobsPortal.js"></script>
+
+{% endblock %}
