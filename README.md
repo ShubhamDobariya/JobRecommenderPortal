@@ -18,11 +18,7 @@ A modern web application that helps users find personalized job recommendations 
 
 ---
 
-## Screenshots
 
-<!-- Add screenshots of your app here if available -->
-
----
 
 ## Getting Started
 
@@ -77,9 +73,6 @@ RAPIDAPI_KEY=your_rapidapi_key
 uvicorn app.main:app --reload
 ```
 
-Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
-
----
 
 ## Project Structure
 
@@ -98,13 +91,6 @@ run.py
 
 ---
 
-## Deployment
-
-- You can deploy this app for free on [Render.com](https://render.com/), [Railway](https://railway.app/), or similar platforms.
-- For production, serve static files with a CDN or web server (e.g., Nginx).
-
----
-
 ## Credits
 
 - [FastAPI](https://fastapi.tiangolo.com/)
@@ -116,18 +102,9 @@ run.py
 
 ---
 
-## License
-
-MIT License
-
----
 
 ## Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
 ---
-
-## Contact
-
-For questions or support, open an issue or contact [your email/contact info]. 
