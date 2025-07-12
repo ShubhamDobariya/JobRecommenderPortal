@@ -4,6 +4,19 @@ A modern web application that helps users find personalized job recommendations 
 
 ---
 
+## Key Technologies Used
+
+- **FastAPI:** High-performance Python web framework for backend APIs and authentication.
+- **MongoDB:** NoSQL database for storing user data and resumes.
+- **Cloudinary:** Secure cloud storage for user-uploaded resumes (PDF/DOCX).
+- **Google Gemini AI & Scikit-learn:** AI and ML for extracting skills and keywords from resumes.
+- **Jinja2:** Templating engine for dynamic HTML rendering.
+- **Bootstrap 5:** Responsive, modern CSS framework for UI.
+- **JavaScript (Vanilla):** For interactive features and smooth UX.
+- **Aiohttp:** Asynchronous HTTP client for efficient external API calls.
+
+---
+
 ## Features
 
 - **User Authentication:** Secure sign up, login, and logout.
