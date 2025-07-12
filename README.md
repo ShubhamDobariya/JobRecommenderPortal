@@ -72,7 +72,7 @@ RAPIDAPI_KEY=your_rapidapi_key
 ```bash
 uvicorn app.main:app --reload
 ```
-
+---
 
 ## Project Structure
 
